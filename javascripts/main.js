@@ -11,6 +11,7 @@ $(document).ready(function(){
 
 	FbAPI.getTodos().then(() => {
 		FbAPI.writeDom();
+		countTask();
 	}).catch((error) => {
 		console.log("getTodos error ", error);
 	});
@@ -28,6 +29,7 @@ $(document).ready(function(){
 			$('.list-container').removeClass('hide');
 			$('#add-todo-text').val("");
 			FbAPI.writeDom();
+			countTask();
 		}).catch(() => {
 
 		});
@@ -36,6 +38,11 @@ $(document).ready(function(){
 	//delete todo
 	//edit todo
 	//complete todo
+
+	let countTask = () => {
+		let reaminingTasks = $("#incomplete-tasks li").length;
+		$("#counter").hide().fadeIn(3000).html(reaminingTasks);
+	};
 
 
 
