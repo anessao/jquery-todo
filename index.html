@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Gettin' Sassy</title>
+    <title>Mighty Morphing ToDo List</title>
     <!-- Third Party Styles -->
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Raleway" rel="stylesheet">
     <link rel="stylesheet" href="./lib/bower_components/bootstrap/dist/css/bootstrap.css">
@@ -11,7 +11,59 @@
 
   </head>
   <body>
-    <h1>Getting Sassy</h1>
+
+    <div class="jumbotron">
+      <h1>Mighty Morphing ToDo List!</h1>
+      <p>are you late, late, late! for a very important date? Keep track here!</p>
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Brand</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">New</a></li>
+            <li><a href="#">List</a></li>
+          </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    </div>
+
+    
+    <div class="col-xs-8 col-xs-offset-2 main-container">
+      <div class="col-xs-12 new-container hide">
+          <div class="row form-spacing">
+            <div class="col-xs-12 text-center">
+              <h3>New Todo</h3>
+              <input type="text" class="form-control form-spacing" id="add-todo-text" placeholder="New Todo Item">
+            </div>
+          </div>
+          <div class="row form-spacing">
+            <div class="col-xs-12 text-center">
+              <button type="button" class="btn btn-primary btn-lg" id="add-todo-button">Add New Todo</button>
+            </div>
+          </div>
+      </div>
+      <div class="col-xs-12 list-container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h3>Todo<span id="counter"></span></h3>
+            <ul id="incomplete-tasks"></ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <h3>Completed</h3>
+            <ul id="completed-tasks"></ul>        
+          </div>
+        </div>
+      </div>
+
+
+    </div> 
 
     <!-- Third Party Scripts -->
     <script type="text/javascript" src="./lib/bower_components/jquery/dist/jquery.js"></script>
