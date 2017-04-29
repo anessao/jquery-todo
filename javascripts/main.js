@@ -38,6 +38,15 @@ $(document).ready(function(){
 	//delete todo
 	//edit todo
 	//complete todo
+	$(".main-container").on("click", "input[type='checkbox']", (e) => {
+		let targetId = e.target.id;
+		FbAPI.checker(targetId).then(() => {
+			FbAPI.writeDom();
+			countTask();
+		}).catch((error) => {
+			console.log("checker error ", error);
+		});
+	});
 
 	let countTask = () => {
 		let reaminingTasks = $("#incomplete-tasks li").length;
