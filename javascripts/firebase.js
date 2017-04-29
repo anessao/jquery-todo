@@ -2,28 +2,14 @@ var FbAPI = (() => {
 	let todos = [];
 
 	return {
-		todoGette : () => {
+		todoGetter : () => {
 			return todos;
+		},
+		setToDos :  (newArray) => {
+			todos = newArray;
+		},
+		getSingleTodo: (newTodo) => {
+			todos.push(newTodo);
 		}
 	};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 })();

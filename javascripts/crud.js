@@ -9,16 +9,24 @@ var FbAPI = ((oldAPI) => {
 				Object.keys(response).forEach((key) => {
 					response[key].id = key;
 					items.push(response[key]);
-				})
-
-				resolve(items);
+				});
+				FbAPI.setToDos(items);
+				resolve();
 			})
 			.fail((error) => {
 				reject(error);
 			});
 		});
 	};
-	
+
+	oldAPI.addTodo = (newTodo) => {
+		console.log("oldapi adtodo");
+		return new Promise ((resolve, reject) => {
+			newTodo.id = `item${FbAPI.todoGetter().length}`;
+			FbAPI.getSingleTodo(newTodo);
+			resolve();
+		});
+	};
 
 
 
