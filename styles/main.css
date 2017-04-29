@@ -2,3 +2,7 @@ body {
   background-color: #FF7C13;
   color: white;
   font-family: "Raleway", sans-serif; }
+
+.jumbotron {
+  background-color: #380047;
+  padding-bottom: 0px; }
