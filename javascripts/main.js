@@ -24,7 +24,6 @@ $(document).ready(function(){
 			task: $('#add-todo-text').val()
 		};
 		FbAPI.addTodo(newTodo).then(() => {
-			console.log("main.js", newTodo);
 			$('.new-container').addClass('hide');
 			$('.list-container').removeClass('hide');
 			$('#add-todo-text').val("");
@@ -36,6 +35,16 @@ $(document).ready(function(){
 	});
 	
 	//delete todo
+	$(".main-container").on("click", ".delete", (e) => {
+		let targetId2 = e.target.id;
+		FbAPI.deleteTodo(targetId2).then(() => {
+			FbAPI.writeDom();
+			countTask();
+		}).catch((deleteError) => {
+			console.log("deleteTodo error: ", deleteError);
+		});
+	});
+
 	//edit todo
 	//complete todo
 	$(".main-container").on("click", "input[type='checkbox']", (e) => {

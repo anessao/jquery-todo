@@ -12,8 +12,12 @@ var FbAPI = (() => {
 			todos.push(newTodo);
 		},
 		setChecked: (itemId) => {
-			const position = itemId.split("item")[1];
+			let position = itemId.split("item")[1];
 			todos[position].isCompleted = !todos[position].isCompleted;
+		},
+		arrayDelete: (id) => {
+			let position2 = id.split("item")[1];
+			todos.splice(position2, 1);
 		}
 	};
 })();
