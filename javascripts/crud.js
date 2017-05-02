@@ -19,7 +19,6 @@ var FbAPI = ((oldAPI) => {
 	};
 
 	oldAPI.addTodo = (apiKeys, newTodo) => {
-		console.log("oldapi adtodo");
 		return new Promise ((resolve, reject) => {
 			$.ajax({
 				method: 'POST',
@@ -53,10 +52,17 @@ var FbAPI = ((oldAPI) => {
 		});
 	};
 	
-	oldAPI.editTodo = (apiKeys, editId) => {
+	oldAPI.editTodo = (apiKeys, editTodo, editId) => {
 		return new Promise ((resolve, reject) => {
-			FbAPI.arrayDelete(editId);
-			resolve();
+			$.ajax({
+				method: 'PUT',
+				url: `${apiKeys.databaseURL}/items/${editId}.json`,
+				data: JSON.stringify(editTodo)
+			}).done(() => {
+				resolve();
+			}).fail((error) => {
+				reject("add error: ", error);
+			});
 		});
 	};
 
