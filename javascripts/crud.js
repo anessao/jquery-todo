@@ -35,9 +35,16 @@ var FbAPI = ((oldAPI) => {
 		});
 	};
 
-	oldAPI.deleteTodo = (id2) => {
+	oldAPI.deleteTodo = (deleteId) => {
 		return new Promise ((resolve, reject) => {
-			FbAPI.arrayDelete(id2);
+			FbAPI.arrayDelete(deleteId);
+			resolve();
+		});
+	};
+	
+	oldAPI.editTodo = (editId) => {
+		return new Promise ((resolve, reject) => {
+			FbAPI.arrayDelete(editId);
 			resolve();
 		});
 	};

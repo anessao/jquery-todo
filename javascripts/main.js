@@ -46,6 +46,20 @@ $(document).ready(function(){
 	});
 
 	//edit todo
+	$(".main-container").on("click", ".edit", (e) => {
+		let targetId3 = e.target.id;
+		let originalText = $(e.target).closest('.col-xs-4').siblings('.col-xs-8').find('.task').html();
+		FbAPI.editTodo(targetId3).then(() => {
+			$('.list-container').addClass('hide');
+			$('.new-container').removeClass('hide');
+			$('#add-todo-text').focus();
+			$('#add-todo-text').val(originalText);
+
+		}).catch((editError) => {
+			console.log("editTodo error: ", editError);
+		});
+	});
+
 	//complete todo
 	$(".main-container").on("click", "input[type='checkbox']", (e) => {
 		let targetId = e.target.id;
@@ -59,7 +73,7 @@ $(document).ready(function(){
 
 	let countTask = () => {
 		let reaminingTasks = $("#incomplete-tasks li").length;
-		$("#counter").hide().fadeIn(3000).html(reaminingTasks);
+		$("#counter").hide().fadeIn(1500).html(reaminingTasks);
 	};
 
 
