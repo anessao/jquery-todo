@@ -33,7 +33,6 @@ $(document).ready(function(){
 			$('.list-container').removeClass('hide');
 			$('#add-todo-text').val("");
 			FbAPI.writeDom(apiKeys);
-			countTask();
 		}).catch(() => {
 
 		});
@@ -44,7 +43,6 @@ $(document).ready(function(){
 		let targetId2 = e.target.id;
 		FbAPI.deleteTodo(apiKeys, targetId2).then(() => {
 			FbAPI.writeDom(apiKeys);
-			countTask();
 		}).catch((deleteError) => {
 			console.log("deleteTodo error: ", deleteError);
 		});
@@ -70,16 +68,12 @@ $(document).ready(function(){
 		let targetId = e.target.id;
 		FbAPI.checker(targetId).then(() => {
 			FbAPI.writeDom(apiKeys);
-			countTask();
 		}).catch((error) => {
 			console.log("checker error ", error);
 		});
 	});
 
-	let countTask = () => {
-		let reaminingTasks = $("#incomplete-tasks li").length;
-		$("#counter").hide().fadeIn(1500).html(reaminingTasks);
-	};
+	
 
 
 

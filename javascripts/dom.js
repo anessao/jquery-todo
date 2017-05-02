@@ -1,5 +1,10 @@
 var FbAPI = ((oldFbAPI) => {
 
+	oldFbAPI.countTask = () => {
+		let reaminingTasks = $("#incomplete-tasks li").length;
+		$("#counter").hide().fadeIn(1500).html(reaminingTasks);
+	};
+
 	oldFbAPI.writeDom = (keys) => {
 		FbAPI.getTodos(keys).then((results) => {
 		let todos = results;
@@ -33,6 +38,7 @@ var FbAPI = ((oldFbAPI) => {
 		
 		$('#completed-tasks').html(doneString);
 		$('#incomplete-tasks').html(notDoneString);
+		oldFbAPI.countTask();
 		}).catch((error) => {
 			console.log("writeDom error: ", error);
 		});
