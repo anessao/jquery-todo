@@ -23,15 +23,14 @@ $(document).ready(function(){
 
 	//add todo
 	$("#add-todo-button").click(() => {
-		console.log("click working");
 		let newTodo = {
 			isCompleted: false,
 			task: $('#add-todo-text').val()
 		};
-		FbAPI.addTodo(newTodo).then(() => {
+		FbAPI.addTodo(apiKeys, newTodo).then(() => {
+			$('#add-todo-text').val("");
 			$('.new-container').addClass('hide');
 			$('.list-container').removeClass('hide');
-			$('#add-todo-text').val("");
 			FbAPI.writeDom(apiKeys);
 		}).catch(() => {
 

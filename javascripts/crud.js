@@ -21,9 +21,15 @@ var FbAPI = ((oldAPI) => {
 	oldAPI.addTodo = (apiKeys, newTodo) => {
 		console.log("oldapi adtodo");
 		return new Promise ((resolve, reject) => {
-			newTodo.id = `item${FbAPI.todoGetter().length}`;
-			FbAPI.getSingleTodo(newTodo);
-			resolve();
+			$.ajax({
+				method: 'POST',
+				url: `${apiKeys.databaseURL}/items.json`,
+				data: JSON.stringify(newTodo)
+			}).done(() => {
+				resolve();
+			}).fail((error) => {
+				reject("add error: ", error);
+			});
 		});
 	};
 
