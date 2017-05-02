@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	let apiKeys;
+
 	$('#new-item').click(() => {
 		$('.list-container').addClass('hide');
 		$('.new-container').removeClass('hide');
@@ -9,11 +11,14 @@ $(document).ready(function(){
 		$('.list-container').removeClass('hide');
 	});
 
-	FbAPI.getTodos().then(() => {
-		FbAPI.writeDom();
-		countTask();
+
+	//FIREBASE INITIALIZE FUNCTION
+	FbAPI.firebaseCredentials().then((keys) => {
+		apiKeys = keys;
+		firebase.initializeApp(apiKeys);
+		FbAPI.writeDom(apiKeys);
 	}).catch((error) => {
-		console.log("getTodos error ", error);
+		console.log("key errors", error);
 	});
 
 	//add todo
@@ -27,7 +32,7 @@ $(document).ready(function(){
 			$('.new-container').addClass('hide');
 			$('.list-container').removeClass('hide');
 			$('#add-todo-text').val("");
-			FbAPI.writeDom();
+			FbAPI.writeDom(apiKeys);
 			countTask();
 		}).catch(() => {
 
@@ -37,8 +42,8 @@ $(document).ready(function(){
 	//delete todo
 	$(".main-container").on("click", ".delete", (e) => {
 		let targetId2 = e.target.id;
-		FbAPI.deleteTodo(targetId2).then(() => {
-			FbAPI.writeDom();
+		FbAPI.deleteTodo(apiKeys, targetId2).then(() => {
+			FbAPI.writeDom(apiKeys);
 			countTask();
 		}).catch((deleteError) => {
 			console.log("deleteTodo error: ", deleteError);
@@ -64,7 +69,7 @@ $(document).ready(function(){
 	$(".main-container").on("click", "input[type='checkbox']", (e) => {
 		let targetId = e.target.id;
 		FbAPI.checker(targetId).then(() => {
-			FbAPI.writeDom();
+			FbAPI.writeDom(apiKeys);
 			countTask();
 		}).catch((error) => {
 			console.log("checker error ", error);

@@ -1,7 +1,8 @@
 var FbAPI = ((oldFbAPI) => {
 
-	oldFbAPI.writeDom = () => {
-		let todos = FbAPI.todoGetter();
+	oldFbAPI.writeDom = (keys) => {
+		FbAPI.getTodos(keys).then((results) => {
+		let todos = results;
 		let doneString = "";
 		let notDoneString = "";
 
@@ -32,7 +33,9 @@ var FbAPI = ((oldFbAPI) => {
 		
 		$('#completed-tasks').html(doneString);
 		$('#incomplete-tasks').html(notDoneString);
-
+		}).catch((error) => {
+			console.log("writeDom error: ", error);
+		});
 	};
 
 

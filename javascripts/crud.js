@@ -1,17 +1,16 @@
 var FbAPI = ((oldAPI) => {
 	
-	oldAPI.getTodos = () => {
+	oldAPI.getTodos = (apiKeys) => {
 		let items = [];
 		return new Promise ((resolve, reject) => {
-			$.ajax('./db/seed.json')
+			$.ajax(`${apiKeys.databaseURL}/items.json`)
 			.done((data) => {
-				let response = data.items;
+				let response = data;
 				Object.keys(response).forEach((key) => {
 					response[key].id = key;
 					items.push(response[key]);
 				});
-				FbAPI.setToDos(items);
-				resolve();
+				resolve(items);
 			})
 			.fail((error) => {
 				reject(error);
@@ -19,7 +18,7 @@ var FbAPI = ((oldAPI) => {
 		});
 	};
 
-	oldAPI.addTodo = (newTodo) => {
+	oldAPI.addTodo = (apiKeys, newTodo) => {
 		console.log("oldapi adtodo");
 		return new Promise ((resolve, reject) => {
 			newTodo.id = `item${FbAPI.todoGetter().length}`;
@@ -28,21 +27,27 @@ var FbAPI = ((oldAPI) => {
 		});
 	};
 
-	oldAPI.checker = (id) => {
+	oldAPI.checker = (apiKeys, id) => {
 		return new Promise((resolve, reject) => {
 			FbAPI.setChecked(id);
 			resolve();
 		});
 	};
 
-	oldAPI.deleteTodo = (deleteId) => {
+	oldAPI.deleteTodo = (apiKeys, deleteId) => {
 		return new Promise ((resolve, reject) => {
-			FbAPI.arrayDelete(deleteId);
-			resolve();
+			$.ajax({
+				method: 'DELETE',
+				url: `${apiKeys.databaseURL}/items/${deleteId}.json`
+			}).done(() => {
+				resolve();
+			}).fail((error) => {
+				reject("delete error: ", error);
+			});
 		});
 	};
 	
-	oldAPI.editTodo = (editId) => {
+	oldAPI.editTodo = (apiKeys, editId) => {
 		return new Promise ((resolve, reject) => {
 			FbAPI.arrayDelete(editId);
 			resolve();
