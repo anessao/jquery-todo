@@ -98,12 +98,41 @@ $(document).ready(function(){
 
 		let user = {email, password};
 		FbAPI.registerUser(user).then((response) => {
-			console.log("register response", response);
+			let newUser = {
+				uid: response.uid,
+				username: username
+			};
+
+			FbAPI.addUser(apiKeys, newUser).then((response) => {
+			}).catch((newUserError) => {
+				console.log("add user error: ", newUserError);
+			});
 		}).catch((error) => {
 			console.log("register user error: ", error);
 		});
 	});
 
+
+	let clearLogin = () => {
+		let email = $("#inputEmail").val("");
+		let password = $("#inputPassword").val("");
+		let username = $("#inputUsername").val("");
+	};
+
+	$("#loginButton").click(() => {
+		let email = $("#inputEmail").val();
+		let password = $("#inputPassword").val();
+
+		let user = {email, password};
+		FbAPI.loginUser(user).then((response) => {
+			clearLogin();
+			$("#login-container").addClass("hide");
+			$(".main-container").removeClass("hide");
+			FbAPI.writeDom(apiKeys);
+		}).catch((error) => {
+			console.log("login error: ", error);
+		});
+	});
 
 
 

@@ -9,6 +9,16 @@ var FbAPI = ((oldFbAPI) => {
 			});
 		});
 	};
+	oldFbAPI.loginUser = (userCreds) => {
+		return new Promise((resolve, reject) => {
+			firebase.auth().signInWithEmailAndPassword(userCreds.email, userCreds.password)
+			.then((authData) => {
+				resolve(authData);
+			}).catch((error) => {
+				reject(error);
+			});
+		});
+	};
 
 
 	return oldFbAPI;
