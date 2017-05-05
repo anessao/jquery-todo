@@ -19,6 +19,13 @@ var FbAPI = ((oldFbAPI) => {
 			});
 		});
 	};
+	oldFbAPI.credentialsCurrentUser = () => {
+		return firebase.auth().currentUser;
+	};
+
+	oldFbAPI.logoutUser = () => {
+		firebase.auth().signOut();
+	};
 
 
 	return oldFbAPI;

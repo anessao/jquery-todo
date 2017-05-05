@@ -104,6 +104,14 @@ $(document).ready(function(){
 			};
 
 			FbAPI.addUser(apiKeys, newUser).then((response) => {
+				FbAPI.loginUser(user).then((response) => {
+					clearLogin();
+					$("#login-container").addClass("hide");
+					$(".main-container").removeClass("hide");
+					FbAPI.writeDom(apiKeys);
+				}).catch((error) => {
+					console.log("login error: ", error);
+				});
 			}).catch((newUserError) => {
 				console.log("add user error: ", newUserError);
 			});
@@ -129,12 +137,18 @@ $(document).ready(function(){
 			$("#login-container").addClass("hide");
 			$(".main-container").removeClass("hide");
 			FbAPI.writeDom(apiKeys);
+			FbAPI.writeDomLogoutBtn(apiKeys);
 		}).catch((error) => {
 			console.log("login error: ", error);
 		});
 	});
 
-
+	$("#logout-container").on("click", () => {
+		$(".main-container").addClass("hide");
+		$("#login-container").removeClass("hide");
+		clearLogin();
+		FbAPI.logoutUser();
+	});
 
 
 

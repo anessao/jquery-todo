@@ -43,6 +43,13 @@ var FbAPI = ((oldFbAPI) => {
 			console.log("writeDom error: ", error);
 		});
 	};
+	oldFbAPI.writeDomLogoutBtn = (apiKey) => {
+		let uid = FbAPI.credentialsCurrentUser().uid;
+		FbAPI.getUser(apiKey, uid).then((user) => {
+			let logoutButton = `<button class="btn btn-danger" id="logoutButton">LOGOUT ${user.username}</button>`;
+			$("#logout-container").html(logoutButton);
+		});
+	};
 
 
 
